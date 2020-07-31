@@ -47,10 +47,3 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
-
-
-
-

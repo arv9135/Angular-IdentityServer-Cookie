@@ -19,6 +19,7 @@ export class CookieManagerService implements AbstractSecurityStorage {
   }
   write(key: string, value: any) {
     value = value || null;
+    //Expiration time can be set in the third parameter of below function.
     this.cookieService.set(`${key}`, JSON.stringify(value), undefined, undefined, undefined, true, "Strict");
     return true;
   }
