@@ -7,6 +7,8 @@ import { CookieService } from 'ngx-cookie-service'
 import { SharedModule } from './shared/shared.module';
 import { AuthModule, OidcConfigService, LogLevel } from 'angular-auth-oidc-client';
 import { CookieManagerService } from './shared/services/cookie-manager.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
@@ -41,6 +43,11 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
       provide: APP_INITIALIZER,
       useFactory: configureAuth,
       deps: [OidcConfigService],
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true,
     },
   ],
